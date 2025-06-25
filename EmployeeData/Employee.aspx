@@ -46,8 +46,9 @@
                         <asp:Label ID="lblCountry" runat="server" Text="Country"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" Enabled="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
-                        </asp:DropDownList>
+                        <%--<asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true"  OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
+                        </asp:DropDownList>--%>
+                        <asp:DropDownList ID="ddlCountry" AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged1" ></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -55,13 +56,20 @@
                         <asp:Label ID="lblState" runat="server" Text="State"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList ID="ddlState" runat="server" OnSelectedIndexChanged="ddlState_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlState" runat="server"   OnSelectedIndexChanged="ddlState_SelectedIndexChanged">
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" /></td>
+                    <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" /></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <asp:GridView ID="grddata" runat="server" ></asp:GridView>
+                    </td>
                 </tr>
             </table>
 
