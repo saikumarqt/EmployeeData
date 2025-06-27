@@ -32,7 +32,7 @@
                         <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>
                         <asp:Label ID="lblMobile" runat="server" Text="Mobile"></asp:Label>
@@ -48,7 +48,7 @@
                     <td>
                         <%--<asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true"  OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
                         </asp:DropDownList>--%>
-                        <asp:DropDownList ID="ddlCountry" AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged1" ></asp:DropDownList>
+                        <asp:DropDownList ID="ddlCountry" AutoPostBack="true" runat="server" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged1"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -56,19 +56,62 @@
                         <asp:Label ID="lblState" runat="server" Text="State"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList ID="ddlState" runat="server"   OnSelectedIndexChanged="ddlState_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlState" runat="server" OnSelectedIndexChanged="ddlState_SelectedIndexChanged">
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" /></td>
+                    <td>
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" /></td>
                 </tr>
             </table>
             <table>
                 <tr>
                     <td>
-                        <asp:GridView ID="grddata" runat="server" ></asp:GridView>
+                        <asp:GridView ID="grddata" AllowPaging="true" PageSize="5" PagerSettings-Mode="Numeric" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="grddata_PageIndexChanging" OnRowEditing="grddata_RowEditing">
+                            <Columns>
+                                <asp:TemplateField HeaderText="FirstName">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblFirstName" runat="server" Text='<%# Bind("FirstName") %>'></asp:Label>
+
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtFistName" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
+
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Email">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblEmail" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="PhoneNum">
+
+                               <ItemTemplate>
+                                    <asp:Label id="lblMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:Label>
+
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox id="txtMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:TextBox>
+
+                                </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <EditItemTemplate>
+                                        <asp:Button ID="btnUpdate" runat="server" Text="Update" />
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" />
+                                        <asp:Button ID="btnDelete" runat="server" Text="Delete" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </td>
                 </tr>
             </table>

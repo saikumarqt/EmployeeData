@@ -17,6 +17,7 @@ namespace EmployeeData
         {
             if (!IsPostBack)
             {
+                BindGrid();
                 //CountryBind();
                 SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=CompanyDB;Integrated Security=True;Encrypt=False");
                 con.Open();
@@ -111,16 +112,32 @@ namespace EmployeeData
                 CountryID = Convert.ToInt32(ddlCountry.SelectedValue),
                 StateID = Convert.ToInt32(ddlCountry.SelectedValue)
             };
-            EmployeeDal dal=new EmployeeDal();
+            EmployeeDal dal = new EmployeeDal();
             dal.InsertEmployee(emp);
+            BindGrid();
+
+        }
+
+        private void BindGrid()
+        {
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=CompanyDB;Integrated Security=True;Encrypt=False");
             SqlDataAdapter da = new SqlDataAdapter("select * from tblEmployeeSai", con);
             DataSet ds = new DataSet();
             da.Fill(ds);
             grddata.DataSource = ds;
             grddata.DataBind();
+        }
 
+        protected void grddata_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grddata.PageIndex = e.NewPageIndex;
+            BindGrid();
+        }
 
+        protected void grddata_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            grddata.PageIndex = e.NewEditIndex;
+            BindGrid();
         }
     }
 }
