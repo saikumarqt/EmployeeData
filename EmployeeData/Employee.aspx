@@ -69,7 +69,7 @@
             <table>
                 <tr>
                     <td>
-                        <asp:GridView ID="grddata" AllowPaging="true" PageSize="5" PagerSettings-Mode="Numeric" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="grddata_PageIndexChanging" OnRowEditing="grddata_RowEditing">
+                        <asp:GridView ShowFooter="false" ID="grddata" DataKeyNames="EmpID" AllowPaging="true" PageSize="5" PagerSettings-Mode="Numeric" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="grddata_PageIndexChanging" OnRowEditing="grddata_RowEditing" OnRowCancelingEdit="grddata_RowCancelingEdit" OnRowDeleting="grddata_RowDeleting" OnRowUpdating="grddata_RowUpdating">
                             <Columns>
                                 <asp:TemplateField HeaderText="FirstName">
                                     <ItemTemplate>
@@ -91,25 +91,35 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="PhoneNum">
 
-                               <ItemTemplate>
-                                    <asp:Label id="lblMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:Label>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:Label>
 
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox id="txtMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:TextBox>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:TextBox>
 
-                                </EditItemTemplate>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <EditItemTemplate>
-                                        <asp:Button ID="btnUpdate" runat="server" Text="Update" />
-                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnUpdate" runat="server" CommandName="Update" Text="Update" />
+                                        <asp:Button ID="btnCancel" runat="server" CommandName="Cancel" Text="Cancel" />
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" />
-                                        <asp:Button ID="btnDelete" runat="server" Text="Delete" />
+                                        <asp:Button ID="btnEdit" runat="server" CommandName="Edit" Text="Edit" />
+                                        <asp:Button ID="btnDelete" CommandName="Delete" runat="server" Text="Delete" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                              <%--  <asp:TemplateField>
+                                    <ItemTemplate>
+                                    </ItemTemplate>
+
+                                    <FooterTemplate>
+                                        <asp:Button ID="btnSave" runat="server" CommandName="Save" Text="Save" />
+
+                                    </FooterTemplate>
+
+                                </asp:TemplateField>--%>
                             </Columns>
                         </asp:GridView>
                     </td>

@@ -139,5 +139,56 @@ namespace EmployeeData
             grddata.PageIndex = e.NewEditIndex;
             BindGrid();
         }
+
+        protected void grddata_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = grddata.Rows[e.RowIndex];
+            int EmpID = Convert.ToInt32(grddata.DataKeys[e.RowIndex].Value);
+            string firstName = ((TextBox)row.FindControl("txtFistName")).Text;
+            string email = ((TextBox)row.FindControl("txtEmail")).Text;
+            string mobile = ((TextBox)row.FindControl("txtMobile")).Text;
+
+
+            string connStr = ConfigurationManager.ConnectionStrings["RegisterConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "UPDATE tblEmployeeSai SET FirstName=@FirstName, Email=@Email, Mobile=@Mobile WHERE EmpID=@EmpID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@EmpID", EmpID);
+                cmd.Parameters.AddWithValue("@FirstName", firstName);
+              
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Mobile", mobile);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+            }
+
+        }
+
+        protected void grddata_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            grddata.EditIndex = -1;
+            BindGrid();
+        }
+
+        protected void grddata_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int EmpID = Convert.ToInt32(grddata.DataKeys[e.RowIndex].Value);
+
+            string connStr = ConfigurationManager.ConnectionStrings["RegisterConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "DELETE FROM tblEmployeeSai WHERE EmpID=@EmpID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@EmpID", EmpID);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }
